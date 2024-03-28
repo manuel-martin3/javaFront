@@ -1,23 +1,80 @@
+export class CCirculo {
+    pi = 3.1416;
+
+    constructor(radio) {
+        this.radio = radio;
+    }
+
+    area() {
+        return this.pi * this.radio * this.radio; // Corrección en el cálculo del área
+    }
+
+    imprimirDetalle() {
+        console.log('El círculo de radio', this.radio, 'tiene como área:', this.area().toFixed(2));
+    }
+}
+
+export class CEmpleado{
+
+    constructor(codigo, nombre, cargo){
+        this.codigo=codigo;
+        this.nombre=nombre;
+        this.cargo=cargo;
+        this.estado=1;
+        this.horasTrabajo=0;
+        this.cantidadProyMes=0;
+    }
+
+    detalle(){
+        console.log('################################################');
+        console.log('datos del empleado: ');
+        console.log('Código: ', this.codigo);
+        console.log('Nombre: ', this.nombre);
+        console.log('Cargo: ', this.cargo);
+        console.log('estado: ', (this.estado==1?'Alta': 'Baja'));
+        console.log('HORAS TRABAJADAS EN LA SEMANA: ', this.horasTrabajo);
+        console.log('N PROYECTO EN LA QUE PARTICIPA: ', this.cantidadProyMes);
+        console.log('################################################');
+    }
+
+    asignarestado(nuevo){
+        this.estado=nuevo;
+    }
+
+    asignarHorastrabajo(hrsTrabajo){
+        this.horasTrabajo=hrsTrabajo;
+    }        
+
+    asignarNroProyectos(nroProyectosMes){
+        this.cantidadProyMes =nroProyectosMes;
+    }
+
+    evaluarDarDeBaja(){
+        if (this.cantidadProyMes<5 && this.horasTrabajo<30) {
+            this.asignarestado(0);
+        }
+    }
+
+}
+
 
 export class CFigura {
     pi = 3.1416;
 
-    constructor(_tipo, _base = 0, _altura = 0, _lado = 0, _radio = 0) {
-        this.radio = _radio;
+    constructor(_tipo, _n1 = 0, _n2 = 0) {        
         this.tipo = _tipo;
-        this.base = _base;
-        this.altura = _altura;
-        this.lado = _lado;        
+        this.n1 = _n1;
+        this.n2 = _n2;        
     }
 
     area() {
         switch (this.tipo) {
             case 'T':
-                return (this.base * this.altura) / 2;
+                return (this.n1 * this.n2) / 2;
             case 'C':
-                return this.pi * this.radio * this.radio;
+                return this.pi * this.n1 * this.n1;
             case 'Q':
-                return this.lado * this.lado;
+                return this.n1 * this.n1;
             default:
                 return 0;
         }
@@ -26,11 +83,11 @@ export class CFigura {
     detalle() {
         switch (this.tipo) {
             case 'T':
-                return 'El triángulo de base: ' + this.base + ' y altura: ' + this.altura + ', tiene como área:';
+                return 'El triángulo de base: ' + this.n1 + ' y altura: ' + this.n2 + ', tiene como área:';
             case "C":
-                return 'El círculo de radio: ' + this.radio + ', tiene como área:';
+                return 'El círculo de radio: ' + this.n1 + ', tiene como área:';
             case "Q":
-                return 'El Cuadrado de lado: ' + this.lado + ', tiene como área:';
+                return 'El Cuadrado de lado: ' + this.n1 + ', tiene como área:';
             default:
                 return "NO EXISTE FIGURA, cálculo es: ";
         }
